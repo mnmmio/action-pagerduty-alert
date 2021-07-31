@@ -25,11 +25,12 @@ try {
 
   let alert = {
     payload: {
-      summary: `${context.repo.repo}: Error in "${context.workflow}" run by @${context.actor}`,
+      summary: 'GitHub deployment workflow failed',
       timestamp: new Date().toISOString(),
       source: 'GitHub Actions',
       severity: 'critical',
       custom_details: {
+        actor: `${context.actor}`,
         run_details: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
         related_commits: context.payload.commits
           ? context.payload.commits.map((commit) => `${commit.message}: ${commit.url}`).join(', ')
